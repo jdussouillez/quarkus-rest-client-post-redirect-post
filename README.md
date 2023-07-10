@@ -2,7 +2,7 @@
 
 Project to reproduce a Post/redirect/Post request on an API using the REST client
 
-See issue XXX
+See issue https://github.com/quarkusio/quarkus/issues/34644
 
 # How to run
 
@@ -29,6 +29,8 @@ curl --location 'http://localhost:8080/token' \
 
 # Resources
 
-- XXX
+- https://github.com/quarkusio/quarkus/issues/34644
 - https://quarkus.io/guides/rest-client-reactive#redirection
+- https://github.com/quarkusio/quarkus/issues/30942
+- https://github.com/quarkusio/quarkus/issues/26517
 - https://en.wikipedia.org/wiki/Post/Redirect/Get

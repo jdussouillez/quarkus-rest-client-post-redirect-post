@@ -31,6 +31,7 @@ curl --location 'http://localhost:8080/token' \
 # Resources
 
 - https://github.com/quarkusio/quarkus/issues/34644
+- https://github.com/quarkusio/quarkus/issues/35126
 - https://quarkus.io/guides/rest-client-reactive#redirection
 - https://github.com/quarkusio/quarkus/issues/30942
 - https://github.com/quarkusio/quarkus/issues/26517

@@ -6,6 +6,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 import java.net.URI;
+import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @Path("/")
@@ -14,6 +15,7 @@ public interface TokenServiceApiClient {
 
     @POST
     @Path("token")
+    @ClientHeaderParam(name = "X-Api-Version", value = "v1.0")
     Uni<Token> getToken(final TokenRequest req);
 
     @ClientRedirectHandler

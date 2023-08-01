@@ -11,6 +11,7 @@ import jakarta.ws.rs.core.Response.Status;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import org.jboss.resteasy.reactive.RestHeader;
 
 @Path("/token")
 public class TokenResource {
@@ -18,7 +19,9 @@ public class TokenResource {
     @POST
     @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Uni<Response> getToken(final TokenRequest req) {
+    public Uni<Response> getToken(
+        @RestHeader("X-Api-Version") final String apiVersion,
+        final TokenRequest req) {
         return Uni.createFrom().item(
             Response.status(Status.TEMPORARY_REDIRECT)
                 .location(URI.create("http://localhost:8080/token/2"))
@@ -30,12 +33,16 @@ public class TokenResource {
     @Path("2")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<Token> getToken2(final TokenRequest req) {
-        return Uni.createFrom().item(
-            new Token(
-                "token-for-" + req.getValue(),
-                LocalDateTime.now(ZoneOffset.UTC).plusHours(6L)
-            )
+    public Uni<Response> getToken2(
+        @RestHeader("X-Api-Version") final String apiVersion,
+        final TokenRequest req) {
+        if (apiVersion == null) {
+            return Uni.createFrom().item(Response.status(Status.BAD_REQUEST).build());
+        }
+        var token = new Token(
+            "token-for-" + req.getValue() + "-" + apiVersion,
+            LocalDateTime.now(ZoneOffset.UTC).plusHours(6L)
         );
+        return Uni.createFrom().item(Response.ok(token).build());
     }
 }

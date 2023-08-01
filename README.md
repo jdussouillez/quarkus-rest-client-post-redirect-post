@@ -23,6 +23,7 @@ cd client && ./mvnw quarkus:dev
 ```sh
 curl --location 'http://localhost:8080/token' \
     --header 'Content-Type: application/json' \
+    --header 'X-Api-Version: v1.0' \
     --data '{"value": "test"}' \
     -v
 ```

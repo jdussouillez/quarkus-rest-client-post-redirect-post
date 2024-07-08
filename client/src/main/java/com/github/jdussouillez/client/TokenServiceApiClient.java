@@ -7,10 +7,12 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 import java.net.URI;
 import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
+import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @Path("/")
 @RegisterRestClient(configKey = "token-service")
+@RegisterProvider(TokenApiRedirectHandler.class)
 public interface TokenServiceApiClient {
 
     @POST
@@ -18,6 +20,7 @@ public interface TokenServiceApiClient {
     @ClientHeaderParam(name = "X-Api-Version", value = "v1.0")
     Uni<Token> getToken(final TokenRequest req);
 
+    /*
     @ClientRedirectHandler
     public static URI handleRedirect(final Response resp) {
         // https://quarkus.io/guides/rest-client-reactive#redirection
@@ -25,4 +28,5 @@ public interface TokenServiceApiClient {
             ? resp.getLocation()
             : null;
     }
+    */
 }

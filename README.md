@@ -15,7 +15,7 @@ cd server && ./mvnw quarkus:dev
 ## Client
 
 ```sh
-cd client && ./mvnw quarkus:dev
+cd client && ./mvnw -s settings.xml quarkus:dev
 ```
 
 # How to test the server using cURL

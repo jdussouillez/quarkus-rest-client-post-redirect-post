@@ -36,10 +36,15 @@ public class TokenResource {
     public Uni<Response> getToken2(
         @RestHeader("X-Api-Version") final String apiVersion,
         final TokenRequest req) {
-        System.out.println(">>> Request = " + req);
         if (apiVersion == null) {
+            System.err.println(">>> Version header is null");
             return Uni.createFrom().item(Response.status(Status.BAD_REQUEST).build());
         }
+        if (req == null) {
+            System.err.println(">>> Body is null");
+            return Uni.createFrom().item(Response.status(Status.BAD_REQUEST).build());
+        }
+        System.out.println(">>> Request = " + req);
         var token = new Token(
             "token-for-" + req.getValue() + "-" + apiVersion,
             LocalDateTime.now(ZoneOffset.UTC).plusHours(6L)

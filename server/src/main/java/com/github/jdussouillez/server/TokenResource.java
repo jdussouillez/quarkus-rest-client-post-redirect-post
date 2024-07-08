@@ -36,6 +36,7 @@ public class TokenResource {
     public Uni<Response> getToken2(
         @RestHeader("X-Api-Version") final String apiVersion,
         final TokenRequest req) {
+        System.out.println(">>> Request = " + req);
         if (apiVersion == null) {
             return Uni.createFrom().item(Response.status(Status.BAD_REQUEST).build());
         }
